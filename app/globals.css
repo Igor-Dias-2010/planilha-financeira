@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.spreadsheet {
+    border: 2px solid black;
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+input {
+    width: 160px;
+}
+
+.inflow {
+    background-color: rgb(9, 179, 9);
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    width: 150px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.outflow {
+    background-color: #ED4337;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    width: 150px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.balance {
+    background-color: #0080ff;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    width: 150px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
