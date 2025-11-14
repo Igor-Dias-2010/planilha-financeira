@@ -6,8 +6,10 @@ import { Trash2, Plus, TrendingUp, TrendingDown, DollarSign } from 'lucide-react
 
 export default function SpreadSheet() {
     const [type, setType] = useState('')
-    const [amount, setAmount] = useState('R$ 0,00')
+    const [category, setCategory] = useState('')
+    const [amount, setAmount] = useState('R$ 0,00')
 
+    const handleCategoryChange = e => setCategory(e.target.value)
     const handleTypeChange = e => setType(e.target.value)
     const handleInputChange = e => {
         let value = e.target.value
@@ -37,23 +39,24 @@ export default function SpreadSheet() {
                 <div className='input-field'>
                     <label htmlFor="transaction-type">Transaction type:</label>
                     <select name="transaction-type" id='transaction-type' value={type} onChange={handleTypeChange}>
-                        <option value="">Select transaction type</option>
+                        <option value="" disabled>Select</option>
                         <option value="inflow">Inflow</option>
                         <option value="outflow">Outflow</option>
                     </select>
                 </div>
                 <div>
                     <label htmlFor="category">Category:</label>
-                    <select name="category" id="category">
+                    <select name="category" id="category" value={category} onChange={handleCategoryChange} >
+                        <option value="" disabled>Select</option>
                         <option value="Freelance">Freelance</option>
                         <option value="other">Other</option>
-                        <option value="">*make more later*</option>
+                        <option value="salary">salary</option>
                     </select>
                 </div>
                 <div className='input-field'>
                     <label htmlFor="amount">Amount:</label>
                     <div className='input-wrapper'>
-                        <input type="text" id='amount' inputMode='numeric' placeholder='0,00' value={amount} onChange={handleInputChange} />
+                        <input type="text" id='amount' inputMode='numeric' value={amount} onChange={handleInputChange} />
                     </div>
                     <button> <Plus size={15} /> Add transaction</button>
                 </div>
