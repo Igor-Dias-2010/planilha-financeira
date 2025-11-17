@@ -6,13 +6,43 @@ import { Trash2, Plus, TrendingUp, TrendingDown, DollarSign } from 'lucide-react
 
 export default function SpreadSheet() {
     const [message, setMessage] = useState('')
+    const [date, setDate] = useState('')
 
     const [type, setType] = useState('')
     const [category, setCategory] = useState('')
     const [amount, setAmount] = useState('R$ 0,00')
 
+    const [transactions, setTransactions] = useState([])
+
+    const isValidDate = (dateString) => {
+        if (!/^\d{2}\/\d{2}\/\d{4}$/.test(dateString)) return false;
+
+        const [day, month, year] = dateString.split('/').map(Number)
+
+        if (month < 1 || month > 12) return false
+
+        const daysInMonth = new Date(year, month, 0).getDate()
+
+        if (day < 1 || day > daysInMonth) return false;
+
+        return true;
+    }
+
+    const handleDateChange = e => {
+        let value = e.target.value.replace(/\D/g, "")
+
+        if (value.length > 8) value = value.slice(0, 8)
+
+        if (value.length >= 5) {
+            value = `${value.slice(0, 2)}/${value.slice(2, 4)}/${value.slice(4)}`
+        } else if (value.length >= 3) {
+            value = `${value.slice(0, 2)}/${value.slice(2)}`
+        }
+        setDate(value)
+    }
     const handleCategoryChange = e => setCategory(e.target.value)
     const handleTypeChange = e => setType(e.target.value)
+
     const handleInputChange = e => {
         let value = e.target.value
         value = value.replace(/\D/g, "")
@@ -23,7 +53,27 @@ export default function SpreadSheet() {
         })
         setAmount(formatedValue)
     }
-    const addValue = () => { }
+    const addValue = () => {
+        if (!type || !category || amount === "R$ 0,00" || !isValidDate(date)) {
+            setMessage("Fill in all fields before adding!")
+            setTimeout(() => setMessage(""), 3000)
+            return
+        }
+        const newTransaction = {
+            id: Date.now(),
+            type,
+            category,
+            amount,
+            date,
+        }
+        setTransactions(prev => [...prev, newTransaction])
+
+        setType('')
+        setCategory('')
+        setAmount("R$ 0,00")
+        setDate('dd/mm/yyyy')
+        setTimeout(() => setMessage(''), 3000)
+    }
     return (
         <div>
             <h1>Financial spreadsheet</h1>
@@ -48,13 +98,13 @@ export default function SpreadSheet() {
                         <option value="outflow">Outflow</option>
                     </select>
                 </div>
-                <div>
+                <div className='input-field'>
                     <label htmlFor="category">Category:</label>
                     <select name="category" id="category" value={category} onChange={handleCategoryChange} >
                         <option value="" disabled>Select</option>
                         <option value="Freelance">Freelance</option>
-                        <option value="other">Other</option>
                         <option value="salary">salary</option>
+                        <option value="other">Other</option>
                     </select>
                 </div>
                 <div className='input-field'>
@@ -62,7 +112,24 @@ export default function SpreadSheet() {
                     <div className='input-wrapper'>
                         <input type="text" id='amount' inputMode='numeric' value={amount} onChange={handleInputChange} />
                     </div>
-                    <button onClick={addValue}> <Plus size={15} /> Add transaction</button>
+                </div>
+                <div className='input-field'>
+                    <label htmlFor="date">Date:</label>
+                    <div className='input-wrapper'>
+                        <input type="text" id='date' inputMode='numeric' value={date} onChange={handleDateChange} placeholder='dd/mm/yyyy' />
+                    </div>
+                </div>
+                <button onClick={addValue}> <Plus size={15} /> Add transaction</button>
+                <div className='transaction-list'>
+                    <h3>Transactions</h3>
+
+                    {transactions.length === 0 && <p>No transations yet.</p>}
+
+                    {transactions.map(t => (
+                        <div key={t.id} className='transaction'>
+                            <p><strong>{t.type}</strong> - {t.category} - {t.amount} - {t.date}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
