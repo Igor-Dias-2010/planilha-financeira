@@ -5,9 +5,15 @@ import { Trash2, Plus, TrendingUp, TrendingDown, DollarSign } from 'lucide-react
 
 
 export default function SpreadSheet() {
+    const [message, setMessage] = useState('')
+
     const [type, setType] = useState('')
     const [category, setCategory] = useState('')
     const [amount, setAmount] = useState('R$ 0,00')
+
+    const [inflow, setInflow] = useState(0)
+    const [outflow, setoutflow] = useState(0)
+    const [capital, setCapital] = useState(0)
 
     const handleCategoryChange = e => setCategory(e.target.value)
     const handleTypeChange = e => setType(e.target.value)
@@ -21,19 +27,24 @@ export default function SpreadSheet() {
         })
         setAmount(formatedValue)
     }
+    const addValue = () => { }
     return (
         <div>
             <h1>Financial spreadsheet</h1>
             <h2>Organize your finances here</h2>
             <div className='spreadsheet'>
+                {message && <p>{message}</p>}
                 <div className='inflow'>
                     <h2><TrendingUp /> Inflow</h2>
+                    {inflow && <p>{inflow}</p>}
                 </div>
                 <div className='outflow'>
                     <h2><TrendingDown />Outflow</h2>
+                    {outflow && <p>{outflow}</p>}
                 </div>
                 <div className='balance'>
                     <h2><DollarSign />Balance</h2>
+                    {capital && <p>{capital}</p>}
                 </div>
                 <h3>New transaction</h3>
                 <div className='input-field'>
@@ -58,7 +69,7 @@ export default function SpreadSheet() {
                     <div className='input-wrapper'>
                         <input type="text" id='amount' inputMode='numeric' value={amount} onChange={handleInputChange} />
                     </div>
-                    <button> <Plus size={15} /> Add transaction</button>
+                    <button onClick={addValue}> <Plus size={15} /> Add transaction</button>
                 </div>
             </div>
         </div>
