@@ -13,7 +13,7 @@ export default function Spreadsheet() {
     const [tipo, setTipo] = useState('')
     const [categoria, setCategoria] = useState('')
     const [obs, setObs] = useState('')
-    const [valor, setValor] = useState('')
+    const [valor, setValor] = useState('R$ 0,00')
     const [transacoes, setTransacoes] = useState([])
 
     const formatarData = isoString => {
@@ -30,6 +30,7 @@ export default function Spreadsheet() {
             <Valor valor={valor} setValor={setValor} />
             <Adicionar tipo={tipo} categoria={categoria} obs={obs} valor={valor} transacoes={transacoes} setTransacoes={setTransacoes} setTipo={setTipo} setCategoria={setCategoria} setObs={setObs} setValor={setValor} />
 
+            <hr />
             <h2>Histórico de transações:</h2>
 
             <ul>

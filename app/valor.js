@@ -25,8 +25,11 @@ export default function Valor({ valor, setValor }) {
 
     return (
         <div className='valor'>
-            <label htmlFor="valor">Digite o valor:</label>
-            <input type="text" placeholder='R$ 0,00' id='valor' value={valor} onChange={handleValorChange}/>
+            <div className='input-field'>
+                <label htmlFor="valor">Digite o valor:</label>
+                <input type="text" placeholder='R$ 0,00' id='valor' value={valor} onChange={handleValorChange} className='valorInput' />
+
+            </div>
         </div>
     )
 }
