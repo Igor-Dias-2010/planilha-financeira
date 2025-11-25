@@ -9,6 +9,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
+    background-color: rgb(143, 143, 143);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -36,6 +37,7 @@ body {
 select {
     width: 180px;
     cursor: pointer;
+    background-color: rgb(233, 233, 233);
 }
 
 input,
@@ -47,10 +49,12 @@ input{
     padding-left: 5px;
     padding-right: 5px;
     height: 20px;
+    background-color: rgb(233, 233, 233);
 }
 button {
-    width: 50px;
-    height: 20px;
+    width: 60px;
+    height: 25px;
+    font-size: 15px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin-top: 10px;
     margin-bottom: 5px;
@@ -66,4 +70,11 @@ button:hover {
 
 button:active {
     transform: scale(1.0);
+}
+hr{
+    background-color: black;
+    height: 1px;
+    margin: 15px;
+    border: none;
+    width: 100%;
 }
